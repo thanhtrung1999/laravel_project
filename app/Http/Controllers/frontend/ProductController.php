@@ -44,8 +44,13 @@ class ProductController extends Controller
         return view('frontend.store.products.shop', $data);
     }
 
-    public function detail(){
-        return view('frontend.store.products.detail');
+    public function detail($id){
+        $data = [
+            'product' => $this->_productModel->getProductById($id),
+            'attributes' => $this->_attributeModel->getAllAttributes(),
+            'products_new' => $this->_productModel->getListNewProduct(4)
+        ];
+        return view('frontend.store.products.detail', $data);
     }
 
     public function complete(){

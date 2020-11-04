@@ -24,6 +24,7 @@ Route::group(['prefix' => 'store'], function (){
     });
     Route::group(['prefix' => 'cart'], function (){
         Route::get('', 'frontend\CartController@index');
+        Route::get('add', 'frontend\CartController@add');
     });
     Route::group(['prefix' => 'checkout'], function (){
         Route::get('', 'frontend\CheckoutController@index');

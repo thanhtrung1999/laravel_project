@@ -26,8 +26,8 @@ class Product extends Model
         return Product::where('featured', 1)->take(4)->get();
     }
 
-    public function getListNewProduct(){
-        return Product::orderby('created_at', 'DESC')->take(8)->get();
+    public function getListNewProduct($quantity){
+        return Product::orderby('created_at', 'DESC')->take($quantity)->get();
     }
 
     public function getListProduct(){
@@ -44,5 +44,9 @@ class Product extends Model
         if(isset($request['attr_value'])){
             return Value::find($request['attr_value'])->products()->paginate(12);
         }
+    }
+
+    public function getProductById($id){
+        return Product::find($id);
     }
 }

@@ -6,7 +6,7 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-md-6">
-						<a href="shop.html" class="f-product-1" style="background-image: url(frontend/images/item-1.jpg);">
+						<a href="" class="f-product-1" style="background-image: url(frontend/images/item-1.jpg);">
 							<div class="desc">
 								<h2>Mẫu <br>cho <br>Nam</h2>
 							</div>
@@ -62,7 +62,7 @@
 								<div class="text-rights">
 									<h3 class="title">Dặt hàng hôm nay,nhận ngay khuyến mãi!</h3>
 									<p>Đã có hơn 1000 đơn hàng được gửi đi ở khắp quốc gia.</p>
-									<p><a href="shop.html" class="btn btn-primary">Mua ngay</a> <a href="#" class="btn btn-primary btn-outline">Đọc
+									<p><a href="store/products" class="btn btn-primary">Mua ngay</a> <a href="about-us" class="btn btn-primary btn-outline">Đọc
 											thêm</a></p>
 								</div>
 							</div>
@@ -87,13 +87,13 @@
 							<div class="product-img" style="background-image: url('backend/img/{{$product_featured->img}}');">
 								<div class="cart">
 									<p>
-										<span class="addtocart"><a href="store/products/detail"><i class="icon-shopping-cart"></i></a></span>
-										<span><a href="store/products/detail"><i class="icon-eye"></i></a></span>
+										<span class="addtocart"><a href="store/products/detail/{{$product_featured->id}}"><i class="icon-shopping-cart"></i></a></span>
+										<span><a href="store/products/detail/{{$product_featured->id}}"><i class="icon-eye"></i></a></span>
 									</p>
 								</div>
 							</div>
 							<div class="desc">
-								<h3><a href="store/products/detail">{{$product_featured->name}}</a></h3>
+								<h3><a href="store/products/detail/{{$product_featured->id}}">{{$product_featured->name}}</a></h3>
 								<p class="price"><span>{{number_format($product_featured->price,0,'',',')}} đ</span> </p>
 							</div>
 						</div>
@@ -118,13 +118,13 @@
 								<p class="tag"><span class="new">New</span></p>
 								<div class="cart">
 									<p>
-										<span class="addtocart"><a href="store/products/detail"><i class="icon-shopping-cart"></i></a></span>
-										<span><a href="store/products/detail"><i class="icon-eye"></i></a></span>
+										<span class="addtocart"><a href="store/products/detail/{{$product_new->id}}"><i class="icon-shopping-cart"></i></a></span>
+										<span><a href="store/products/detail/{{$product_new->id}}"><i class="icon-eye"></i></a></span>
 									</p>
 								</div>
 							</div>
 							<div class="desc">
-								<h3><a href="store/products/detail">{{$product_new->name}}</a></h3>
+								<h3><a href="store/products/detail/{{$product_new->id}}">{{$product_new->name}}</a></h3>
 								<p class="price"><span>{{number_format($product_new->price,0,'',',')}} đ</span></p>
 							</div>
 						</div>

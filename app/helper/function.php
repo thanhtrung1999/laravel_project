@@ -90,3 +90,20 @@ function checkVariant($product, $arr_variant_values){
     }
     return true;
 }
+
+function getPriceByVariant($product, $attr){
+    foreach ($product->variants as $variant){
+        $arr = [];
+        foreach ($variant->values as $value){
+            $arr[] = $value->value;
+        }
+
+        if (array_diff($arr, $attr) == NULL){
+            if($variant->price == 0){
+                return $product->price;
+            }
+            return $variant->price;
+        }
+    }
+    return $product->price;
+}

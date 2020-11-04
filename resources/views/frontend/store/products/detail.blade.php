@@ -10,58 +10,56 @@
 							<div class="row">
 								<div class="col-md-5">
 									<div class="product-entry">
-										<div class="product-img" style="background-image: url(frontend/images/item-6.jpg);">
-
-										</div>
-
+										<div class="product-img" style="background-image: url('backend/img/{{$product->img}}');"></div>
 									</div>
 								</div>
 								<div class="col-md-7">
-									<form action="product/AddCart" method="post">
-
+									<form action="store/cart/add" method="get">
 										<div class="desc">
-											<h3>Áo khoác nam đẹp</h3>
+											<h3>{{$product->name}}</h3>
 											<p class="price">
-												<span>150,000</span>
+												<span>{{number_format($product->price,0,'',',')}}đ</span>
 											</p>
-											<p>thông tin</p>
-											<div class="size-wrap">
-												<p class="size-desc">
-													size:
-													<a class="size">M</a>
-													<a class="size">L</a>
-
+											<p>{{$product->info}}</p>
+                                            @foreach(attr_values($product->values) as $key => $values)
+                                            @php
+                                                $class = 'color';
+                                                $width = '';
+                                                if (strtolower($key) == 'size'){
+                                                    $class = 'size';
+                                                } else {
+                                                    $width = 'width: 60px;';
+                                                }
+                                            @endphp
+											<div class="{{$class}}-wrap">
+												<p class="{{$class}}-desc">
+													{{$key}}:
+                                                    @foreach($values as $value)
+													<a class="{{$class}}" style="{{$width}}">{{$value}}</a>
+                                                    @endforeach
 												</p>
 											</div>
-											<div class="size-wrap">
-												<p class="size-desc">
-													Màu sắc:
-													<a class="size">đen</a>
-
-												</p>
-											</div>
+                                            @endforeach
 											<h4>Lựa chọn</h4>
 											<div class="row">
+                                                @foreach(attr_values($product->values) as $key => $values)
+                                                {{--@php
+                                                $name = 'color';
+                                                if (strtolower($key) == 'size'){
+                                                    $name = 'size';
+                                                }
+                                                @endphp--}}
 												<div class="col-md-3">
 													<div class="form-group">
-														<label>size:</label>
-														<select class="form-control " name="attr[size]" id="">
-															<option value="M"> M</option>
-															<option value="L"> L</option>
-
+														<label>{{$key}}:</label>
+														<select class="form-control " name="attr[{{$key}}]" id="">
+                                                            @foreach($values as $value)
+															<option value="{{$value}}">{{$value}}</option>
+                                                            @endforeach
 														</select>
 													</div>
 												</div>
-												<div class="col-md-3">
-													<div class="form-group">
-														<label>Màu sắc:</label>
-														<select class="form-control " name="attr[Màu sắc]" id="">
-															<option value="đen"> đen</option>
-
-														</select>
-													</div>
-												</div>
-
+                                                @endforeach
 
 											</div>
 											<div class="row row-pb-sm">
@@ -72,7 +70,7 @@
 																<i class="icon-minus2"></i>
 															</button>
 														</span>
-														<input type="text" id="quantity" name="quantity" class="form-control input-number" value="1" min="1" max="100">
+														<input type="number" id="quantity" name="quantity" class="form-control input-number" value="1" min="1" max="100">
 														<span class="input-group-btn">
 															<button type="button" class="quantity-right-plus btn" data-type="plus" data-field="">
 																<i class="icon-plus2"></i>
@@ -81,7 +79,7 @@
 													</div>
 												</div>
 											</div>
-											<input type="hidden" name="id_product" value="1">
+											<input type="hidden" name="id_product" value="{{$product->id}}">
 											<p><button class="btn btn-primary btn-addtocart" type="submit"> Thêm vào giỏ hàng</button></p>
 										</div>
 									</form>
@@ -99,7 +97,7 @@
 								</ul>
 								<div class="tab-content">
 									<div id="description" class="tab-pane fade in active">
-										Đây là sản phẩm đẹp
+										{{$product->decribe}}
 									</div>
 								</div>
 							</div>
@@ -117,61 +115,26 @@
 					</div>
 				</div>
 				<div class="row">
+                    @foreach($products_new as $product)
 					<div class="col-md-3 text-center">
 						<div class="product-entry">
-							<div class="product-img" style="background-image: url(frontend/images/item-7.jpg);">
+							<div class="product-img" style="background-image: url('backend/img/{{$product->img}}');">
 								<p class="tag"><span class="new">New</span></p>
 								<div class="cart">
 									<p>
-										<span class="addtocart"><a href="#"><i class="icon-shopping-cart"></i></a></span>
-										<span><a href="product/detail/3"><i class="icon-eye"></i></a></span>
-
+										<span class="addtocart"><a href="store/products/detail/{{$product->id}}"><i class="icon-shopping-cart"></i></a></span>
+										<span><a href="store/products/detail/{{$product->id}}"><i class="icon-eye"></i></a></span>
 
 									</p>
 								</div>
 							</div>
 							<div class="desc">
-								<h3><a href="store/products/detail">Áo nữ vàng</a></h3>
-								<p class="price"><span>150,000 VNĐ</span></p>
+								<h3><a href="store/products/detail/{{$product->id}}">{{$product->name}}</a></h3>
+								<p class="price"><span>{{number_format($product->price,0,'',',')}}đ</span></p>
 							</div>
 						</div>
 					</div>
-					<div class="col-md-3 text-center">
-						<div class="product-entry">
-							<div class="product-img" style="background-image: url(frontend/images/item-8.jpg);">
-								<p class="tag"><span class="new">New</span></p>
-								<div class="cart">
-									<p>
-										<span class="addtocart"><a href="#"><i class="icon-shopping-cart"></i></a></span>
-										<span><a href="product/detail/2"><i class="icon-eye"></i></a></span>
-
-
-									</p>
-								</div>
-							</div>
-							<div class="desc">
-								<h3><a href="store/products/detail">Áo khoác nữ đẹp</a></h3>
-								<p class="price"><span>50,000 VNĐ</span></p>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-3 text-center">
-						<div class="product-entry">
-							<div class="product-img" style="background-image: url(frontend/images/item-6.jpg);">
-								<p class="tag"><span class="new">New</span></p>
-								<div class="cart">
-									<p>
-										<span class="addtocart"><a href="#"><i class="icon-shopping-cart"></i></a></span>
-										<span><a href="product/detail/1"><i class="icon-eye"></i></a></span>
-									</p>
-								</div>
-							</div>
-							<div class="desc">
-								<h3><a href="store/products/detail">Áo khoác nam đẹp</a></h3>
-								<p class="price"><span>150,000 VNĐ</span></p>
-							</div>
-						</div>
-					</div>
+                    @endforeach
 				</div>
 			</div>
 		</div>

@@ -18,7 +18,7 @@ class HomeController extends Controller
     public function index(){
         $data = [
             'products_featured' => $this->_productModel->getFeatured(),
-            'products_new' => $this->_productModel->getListNewProduct(),
+            'products_new' => $this->_productModel->getListNewProduct(8),
         ];
         return view('frontend.index', $data);
     }
